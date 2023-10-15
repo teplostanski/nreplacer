@@ -1,4 +1,4 @@
-// src/replaceModule.ts
+// module.ts
 
 import fs from 'fs'
 import { createReadStream, createWriteStream } from 'fs'

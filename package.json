@@ -1,18 +1,20 @@
 {
   "name": "nreplacer",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A tool to search and replace text in files",
-  "main": "./dist/module.js",
-  "module": "./dist/module.js",
-  "types": "./dist/module.d.ts",
+  "main": "./dist/src/module.js",
+  "module": "./dist/src/module.js",
+  "types": "./dist/src/module.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "node generateVersion.js && tsc",
     "build:types": "rollup -c rollup.config.dts.js",
     "lint": "eslint --fix \"src/**/*.{js,ts,jsx,tsx}\"",
     "prettier": "prettier --write \"src/**/*.{js,ts,jsx,tsx}\"",
     "test": "jest",
     "prepublish": "npm run build",
-    "doc": "typedoc --readme none --options typedoc.config.cjs --includeVersion --entryPointStrategy Expand --entryDocument index.md --excludeGroups true"
+    "doc": "typedoc --readme none --options typedoc.config.cjs --includeVersion --entryPointStrategy Expand --entryDocument index.md --excludeGroups true",
+    "postbuild": "chmod +rx dist/**/* && npm link",
+    "postinstall": "npm run build"
   },
   "files": [
     "./dist",
@@ -46,6 +48,7 @@
   "license": "GPL-3.0-only",
   "devDependencies": {
     "@terwer/typedoc-plugin-markdown": "^4.0.0-next.11",
+    "@types/cli-progress": "^3.11.3",
     "@types/jest": "^29.5.5",
     "@typescript-eslint/eslint-plugin": "^5.27.1",
     "@typescript-eslint/parser": "^5.27.1",
@@ -69,10 +72,14 @@
     "vite-plugin-dts": "^3.6.0"
   },
   "dependencies": {
+    "chalk": "^5.3.0",
+    "cli-progress": "^3.12.0",
     "commander": "^7.2.0",
-    "file-type": "^16.5.0"
+    "dotenv": "^16.3.1",
+    "file-type": "^16.5.0",
+    "ora": "^7.0.1"
   },
   "bin": {
-    "nreplacer": "./dist/index.js"
+    "nreplacer": "./dist/src/cli.js"
   }
 }
