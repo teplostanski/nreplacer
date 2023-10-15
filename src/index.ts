@@ -21,7 +21,7 @@ import pkg from '../package.json' // Путь может отличаться в
 const program = new Command()
 
 program
-  .version(pkg.version) // Используйте версию из package.json
+  .version(pkg.version, '-v, --version') // Используйте версию из package.json
   .description(pkg.description) // Используйте описание из package.json
   .option('-f, --file <path>', 'Path to the file')
   .option('-s, --search <text>', 'Text to search for')
