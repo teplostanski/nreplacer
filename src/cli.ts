@@ -2,7 +2,7 @@
 // cli.ts
 
 import { Command } from 'commander'
-import { replaceInFile } from './module.js'
+import { replaceInFiles } from './module'
 import chalk from 'chalk'
 import ora from 'ora'
 import cliui from 'cliui'
@@ -15,30 +15,38 @@ const version: string = process.env.VERSION || 'unknown'
 const program = new Command()
 
 /**
- * CLI tool for searching and replacing text within files.
+ * Command-line interface (CLI) tool for searching and replacing text within files or directories.
+ *
+ * - If a file path is provided, it performs the search and replace operation within the specific file.
+ * - If a directory path is provided, it performs the search and replace operation recursively within all text files in the directory.
  *
  * @example
- * To run the CLI:
+ * To replace text in a specific file:
  * ```bash
  * nreplacer -f ./path/to/file.txt -s oldText -r newText
  * ```
  *
- * For global replacement:
+ * To replace text globally in a specific file:
  * ```bash
  * nreplacer -f ./path/to/file.txt -s oldText -r newText -g
+ * ```
+ *
+ * To replace text in all files within a directory:
+ * ```bash
+ * nreplacer -f ./path/to/dir -s oldText -r newText
  * ```
  */
 program
   .version(version, '-v, --version')
-  .description('pkg.description')
+  .description('CLI tool for searching and replacing text within files or directories.')
   .option('--nocolor', 'Disable color output')
-  .option('--noverbose', 'Suppress detailed output')
-  .option('-f, --file <path>', 'Path to the file')
+  .option('--noverbose', 'Disable verbose output')
+  .option('-f, --file <path>', 'Path to the file or directory')
   .option('-s, --search <text>', 'Text or regex to search for')
   .option('-r, --replace <text>', 'Text to replace with')
   .option('-g, --global', 'Replace all occurrences', false)
   .action(async (options) => {
-    const { file, search, replace, global: globalReplace, nocolor, noverbose } = options
+    const { file: filePathOrDir, search, replace, global: globalReplace, nocolor, noverbose } = options
 
     const log = {
       error: nocolor ? console.error : (msg: string) => console.error(chalk.red(msg)),
@@ -46,7 +54,7 @@ program
       info: nocolor ? console.log : (msg: string) => console.log(chalk.blue(msg)),
     }
 
-    if (!file || !search || !replace) {
+    if (!filePathOrDir || !search || !replace) {
       log.error('Please provide required options: --file, --search, --replace')
       process.exit(1)
     }
@@ -57,30 +65,24 @@ program
       color: nocolor ? 'white' : 'yellow',
     })
 
-    if (noverbose) {
-      spinner.stop()
-    } else {
-      spinner.start()
-    }
+    spinner.start()
 
     try {
       const startTime = Date.now()
-      const results = await replaceInFile(file, search, replace, globalReplace)
+      const results = await replaceInFiles(filePathOrDir, search, replace, globalReplace)
       const elapsedTime = ((Date.now() - startTime) / 1000).toFixed(2)
 
+      spinner.succeed(`Replaced "${chalk.yellow(search)}" with "${chalk.yellow(replace)}" in ${chalk.yellow(filePathOrDir)}`)
+
+      const ui = cliui({ width: 80 })
+      ui.div(chalk.blueBright('Time taken: '), chalk.yellowBright(`${elapsedTime}s`))
+      ui.div(chalk.blueBright('Matches replaced: '), chalk.yellowBright(`${results.replacedLines}`))
+
       if (!noverbose) {
-        spinner.succeed(`Replaced "${chalk.yellow(search)}" with "${chalk.yellow(replace)}" in ${chalk.yellow(file)}`)
-
-        const ui = cliui({ width: 80 })
-        ui.div(chalk.blueBright('Time taken: '), chalk.yellowBright(`${elapsedTime}s`))
-        ui.div(chalk.blueBright('Matches replaced: '), chalk.yellowBright(`${results.replacedLines}`))
-
         log.info(ui.toString())
       }
     } catch (error) {
-      if (!noverbose) {
-        spinner.fail((error as Error).message)
-      }
+      spinner.fail((error as Error).message)
       process.exit(1)
     }
   })
