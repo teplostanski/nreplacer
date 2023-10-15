@@ -15,31 +15,30 @@ import fileType from 'file-type'
  *
  * @throws {Error} - Throws an error if the file does not exist or is not a text file.
  *
- * @example
- * ```typescript
- * import { replaceInFile } from './replaceModule';
- *
- * (async () => {
- *   await replaceInFile('./sample.txt', 'Hello', 'Hi');
- * })();
- * ```
+ * @returns {Promise<{ totalTime: number, replacedLines: number }>} - A promise that resolves with an object containing the total execution time and the number of lines replaced.
  *
  * @example
  * ```typescript
  * import { replaceInFile } from './replaceModule';
  *
  * (async () => {
- *   await replaceInFile('./sample.txt', /Hello/g, 'Hi');
+ *   const result = await replaceInFile('./sample.txt', 'Hello', 'Hi');
+ *   console.log(`Total time: ${result.totalTime}ms`);
+ *   console.log(`Replaced lines: ${result.replacedLines}`);
  * })();
  * ```
  */
-export async function replaceInFile(filePath: string, searchValue: string | RegExp, replaceValue: string, globalReplace = false): Promise<void> {
+export async function replaceInFile(filePath: string, searchValue: string | RegExp, replaceValue: string, globalReplace = false): Promise<{ totalTime: number; replacedLines: number }> {
+  // Start the timer for execution time
+  const startTime = Date.now()
+
+  // Check if file exists
   if (!fs.existsSync(filePath)) {
     throw new Error(`File not found: ${filePath}`)
   }
 
+  // Determine file type and ensure it's a text file
   const type = await fileType.fromFile(filePath)
-
   if (type && !type.mime.startsWith('text/')) {
     throw new Error(`Unsupported file type: ${type.mime}. This tool is intended for text files.`)
   }
@@ -47,22 +46,39 @@ export async function replaceInFile(filePath: string, searchValue: string | RegE
   const readStream = createReadStream(filePath, { encoding: 'utf8' })
   const writeStream = createWriteStream(filePath + '.tmp', { encoding: 'utf8' })
 
+  let totalMatches = 0
+
+  // Stream to handle the search and replace
   const replaceStream = new Transform({
     transform(chunk, _, callback) {
       let data = chunk.toString()
+
       if (typeof searchValue === 'string' && globalReplace) {
         searchValue = new RegExp(searchValue, 'g')
       }
+
+      // Подсчет всех совпадений в этом чанке
+      const matches = (data.match(searchValue) || []).length
+      totalMatches += matches
+
+      // Замена текста в этом чанке
       data = data.replace(searchValue, replaceValue)
-      this.push(data)
-      callback()
+
+      callback(null, data)
     },
   })
 
-  readStream
-    .pipe(replaceStream)
-    .pipe(writeStream)
-    .on('finish', function () {
-      fs.renameSync(filePath + '.tmp', filePath)
-    })
+  // Pipe the read data through the replace stream and then write the modified data back to a temporary file
+  return new Promise((resolve, reject) => {
+    readStream
+      .pipe(replaceStream)
+      .pipe(writeStream)
+      .on('finish', function () {
+        // Rename the temporary file to the original filename
+        fs.renameSync(filePath + '.tmp', filePath)
+        const totalTime = Date.now() - startTime
+        resolve({ totalTime, replacedLines: totalMatches })
+      })
+      .on('error', reject)
+  })
 }
