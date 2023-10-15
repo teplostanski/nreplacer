@@ -32,13 +32,13 @@ program
   .version(version, '-v, --version')
   .description('pkg.description')
   .option('--nocolor', 'Disable color output')
-  .option('--verbose', 'Enable verbose output')
+  .option('--noverbose', 'Suppress detailed output')
   .option('-f, --file <path>', 'Path to the file')
   .option('-s, --search <text>', 'Text or regex to search for')
   .option('-r, --replace <text>', 'Text to replace with')
   .option('-g, --global', 'Replace all occurrences', false)
   .action(async (options) => {
-    const { file, search, replace, global: globalReplace, nocolor, verbose } = options
+    const { file, search, replace, global: globalReplace, nocolor, noverbose } = options
 
     const log = {
       error: nocolor ? console.error : (msg: string) => console.error(chalk.red(msg)),
@@ -57,26 +57,30 @@ program
       color: nocolor ? 'white' : 'yellow',
     })
 
-    spinner.start()
+    if (noverbose) {
+      spinner.stop()
+    } else {
+      spinner.start()
+    }
 
     try {
       const startTime = Date.now()
       const results = await replaceInFile(file, search, replace, globalReplace)
       const elapsedTime = ((Date.now() - startTime) / 1000).toFixed(2)
 
-      spinner.succeed(`Replaced "${chalk.yellow(search)}" with "${chalk.yellow(replace)}" in ${chalk.yellow(file)}`)
+      if (!noverbose) {
+        spinner.succeed(`Replaced "${chalk.yellow(search)}" with "${chalk.yellow(replace)}" in ${chalk.yellow(file)}`)
 
-      const ui = cliui({ width: 80 })
-      ui.div(chalk.blueBright('Time taken: '), chalk.yellowBright(`${elapsedTime}s`))
-      ui.div(chalk.blueBright('Matches replaced: '), chalk.yellowBright(`${results.replacedLines}`))
+        const ui = cliui({ width: 80 })
+        ui.div(chalk.blueBright('Time taken: '), chalk.yellowBright(`${elapsedTime}s`))
+        ui.div(chalk.blueBright('Matches replaced: '), chalk.yellowBright(`${results.replacedLines}`))
 
-      log.info(ui.toString())
-
-      if (verbose) {
-        log.info(`Detailed info: Replaced "${search}" with "${replace}" in ${file}`)
+        log.info(ui.toString())
       }
     } catch (error) {
-      spinner.fail((error as Error).message)
+      if (!noverbose) {
+        spinner.fail((error as Error).message)
+      }
       process.exit(1)
     }
   })
