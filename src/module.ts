@@ -1,9 +1,12 @@
 // module.ts
-
 import fs from 'fs'
 import { createReadStream, createWriteStream } from 'fs'
 import { Transform } from 'stream'
 import fileType from 'file-type'
+
+function escapeRegExp(string: string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // $& means the whole matched string
+}
 
 /**
  * Replaces occurrences of a search string or regular expression with a given replacement string in a file.
@@ -48,14 +51,18 @@ export async function replaceInFile(filePath: string, searchValue: string | RegE
 
   let totalMatches = 0
 
+  if (typeof searchValue === 'string') {
+    if (globalReplace) {
+      searchValue = new RegExp(escapeRegExp(searchValue), 'g')
+    } else {
+      searchValue = new RegExp(escapeRegExp(searchValue))
+    }
+  }
+
   // Stream to handle the search and replace
   const replaceStream = new Transform({
     transform(chunk, _, callback) {
       let data = chunk.toString()
-
-      if (typeof searchValue === 'string' && globalReplace) {
-        searchValue = new RegExp(searchValue, 'g')
-      }
 
       // Подсчет всех совпадений в этом чанке
       const matches = (data.match(searchValue) || []).length
