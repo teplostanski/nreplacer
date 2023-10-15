@@ -28,6 +28,7 @@ const program = new Command()
  * nreplacer -f ./path/to/file.txt -s oldText -r newText -g
  * ```
  */
+
 program
   .version(version, '-v, --version')
   .description('pkg.description')
@@ -37,13 +38,19 @@ program
   .option('-s, --search <text>', 'Text or regex to search for')
   .option('-r, --replace <text>', 'Text to replace with')
   .option('-g, --global', 'Replace all occurrences', false)
+  .option('--hello-creator', 'Display a special message from the creator')
   .action(async (options) => {
-    const { file, search, replace, global: globalReplace, nocolor, verbose } = options
+    const { file, search, replace, global: globalReplace, nocolor, verbose, helloCreator } = options
 
     const log = {
       error: nocolor ? console.error : (msg: string) => console.error(chalk.red(msg)),
       success: nocolor ? console.log : (msg: string) => console.log(chalk.green(msg)),
       info: nocolor ? console.log : (msg: string) => console.log(chalk.blue(msg)),
+    }
+
+    if (helloCreator) {
+      log.info("Error 418: I can't brew coffee because I'm a teapot, but you can treat me!")
+      process.exit(0) // Завершаем выполнение, так как это пасхалка
     }
 
     if (!file || !search || !replace) {

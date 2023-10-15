@@ -2,19 +2,19 @@
   "name": "nreplacer",
   "version": "0.2.0",
   "description": "A tool to search and replace text in files",
-  "main": "./dist/src/module.js",
-  "module": "./dist/src/module.js",
-  "types": "./dist/src/module.d.ts",
+  "main": "./dist/module.js",
+  "module": "./dist/module.js",
+  "types": "./dist/module.d.ts",
+  "type": "module",
   "scripts": {
-    "build": "node generateVersion.js && tsc",
-    "build:types": "rollup -c rollup.config.dts.js",
+    "build": "tsc",
+    "prebuild": "chmod +rx generatePkgInfo.cjs && node generatePkgInfo.cjs",
     "lint": "eslint --fix \"src/**/*.{js,ts,jsx,tsx}\"",
     "prettier": "prettier --write \"src/**/*.{js,ts,jsx,tsx}\"",
     "test": "jest",
     "prepublish": "npm run build",
     "doc": "typedoc --readme none --options typedoc.config.cjs --includeVersion --entryPointStrategy Expand --entryDocument index.md --excludeGroups true",
-    "postbuild": "chmod +rx dist/**/* && npm link",
-    "postinstall": "npm run build"
+    "postbuild": "chmod +rx dist/* && sudo npm link"
   },
   "files": [
     "./dist",
@@ -45,6 +45,7 @@
     "url": "https://github.com/teplostanski/nreplacer/issues",
     "email": "teplostanski@yandex.ru"
   },
+  "funding": "https://fund.teplostanski.dev",
   "license": "GPL-3.0-only",
   "devDependencies": {
     "@terwer/typedoc-plugin-markdown": "^4.0.0-next.11",
@@ -80,6 +81,6 @@
     "ora": "^7.0.1"
   },
   "bin": {
-    "nreplacer": "./dist/src/cli.js"
+    "nreplacer": "./dist/cli.js"
   }
 }
