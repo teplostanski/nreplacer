@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.2](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.2) (2023-10-16)
+
+
+### Features
+
+* **cli:** enhance CLI output with bordered box and noprint option ([d26b810](https://github.com/teplostanski/nreplacer/commit/d26b810dc159473c32a82f9008341bf33f7f837e))
+
 ### 0.3.1 (2023-10-16)
 
 
