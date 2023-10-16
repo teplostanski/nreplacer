@@ -1,7 +1,7 @@
 {
   "name": "nreplacer",
   "version": "0.3.3",
-  "description": "A tool to search and replace text in files",
+  "description": "CLI tool for searching and replacing text within files or directories.",
   "main": "./dist/module.js",
   "module": "./dist/module.js",
   "types": "./dist/module.d.ts",

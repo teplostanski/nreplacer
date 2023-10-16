@@ -22,7 +22,6 @@ All notable changes to this project will be documented in this file. See [standa
 ### Features
 
 * add the main functional ([73d573d](https://github.com/teplostanski/nreplacer/commit/73d573d7ee8570ed2e72c3e1e435354aeceda908))
-* **cli:** Add easter egg with HTTP 418 'Im a teapot' reference ([97db444](https://github.com/teplostanski/nreplacer/commit/97db44401a8d27688d31545ad6a24d3b10f20a12))
 * **cli:** add shorthand flag for version ([8000b5b](https://github.com/teplostanski/nreplacer/commit/8000b5b620e852b2c8cf73792164f7a7edba2b19))
 * **cli:** change line replacement count to search match count ([8bacee3](https://github.com/teplostanski/nreplacer/commit/8bacee360f53eea7e32653fb288fb233b3b57d74))
 * **cli:** Integrate chalk, ora, and verbose options ([c979a1c](https://github.com/teplostanski/nreplacer/commit/c979a1c04ccfbbde1dd16c9ed2690d061b072f64))

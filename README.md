@@ -26,30 +26,44 @@ npm install nreplacer --save-dev
 
 ## Usage
 
-Replace text in a file or directory using the CLI:
+#### Replace text in a file or directory using the CLI. You can provide either plain text or regex patterns in the --search parameter:
+
+Example with plain text:
 
 ```bash
-nreplacer --file <filepath or directory> --search "old-text" --replace "new-text" [--global] [--noverbose]
-
-    --file: The path to the file or directory where you want to perform the replacement.
-    --search: The text or pattern you wish to search for.
-    --replace: The text you wish to replace the searched text/pattern with.
-    --global (Optional): If specified, will replace all occurrences. If omitted, only the first occurrence will be replaced.
-    --noverbose (Optional): If specified, disables verbose output and only performs the replacement silently.
+nreplacer --file <filepath or directory> --search "old-text" --replace "new-text" [--global] [--noprint] [--nocolor]
 ```
 
-For programmatic usage in your JavaScript or TypeScript projects:
+Example with a regex pattern:
+
+```bash
+nreplacer --file <filepath or directory> --search "/\d{3}-\d{2}-\d{4}/g" --replace "XXX-XX-XXXX" [--global] [--noprint] [--nocolor]
+```
+
+| Option        | Description                                                                                                    |
+| ------------- | -------------------------------------------------------------------------------------------------------------- |
+| `--file`      | The path to the file or directory where you want to perform the replacement.                                   |
+| `--search`    | The text or pattern you wish to search for.                                                                    |
+| `--replace`   | The text you wish to replace the searched text/pattern with.                                                   |
+| `--global`    | (Optional) If specified, will replace all occurrences. If omitted, only the first occurrence will be replaced. |
+| `--noverbose` | (Optional) If specified, disables verbose output and only performs the replacement silently.                   |
+| `--noprint`   | (Optional) If specified, suppresses the output printing.                                                       |
+| `--nocolor`   | (Optional) If specified, disables color in the output.                                                         |
+
+---
+
+#### For programmatic usage in your JavaScript or TypeScript projects:
 
 ```javascript
 #!/usr/bin/env node
-import { replaceInFiles } from "nreplacer";
+import { replaceInFiles } from 'nreplacer'
 
-const filePathOrDir = 'test.txt';
-const searchValue = 'old';
-const replaceValue = 'new';
-const globalReplace = true;
+const filePathOrDir = 'test.txt'
+const searchValue = 'old'
+const replaceValue = 'new'
+const globalReplace = true
 
-replaceInFiles(filePathOrDir, searchValue, replaceValue, globalReplace);
+replaceInFiles(filePathOrDir, searchValue, replaceValue, globalReplace)
 ```
 
 ## Features
@@ -58,6 +72,18 @@ replaceInFiles(filePathOrDir, searchValue, replaceValue, globalReplace);
 - **Flexible**: Supports both global and single occurrence replacements.
 - **Safe**: Checks file type and ensures it's a text-based format before processing.
 - **Intuitive CLI**: Simple and straightforward command line interface.
+- **Regex Support**: Utilize regular expressions for text searching.
+- **Configurable Output**: Control the verbosity and color of the CLI output with flags.
+
+## Recent Updates
+
+- Enhanced output formatting with microsecond precision.
+- Integrated boxen for improved CLI output framing.
+- Added `noprint` option to suppress output.
+- Enhanced CLI output with a bordered box.
+- Regex support added for searching.
+
+Check out our [Changelog](./CHANGELOG.md) for a detailed history of updates.
 
 ## Contributing
 
