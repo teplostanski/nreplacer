@@ -1,6 +1,6 @@
 {
   "name": "nreplacer",
-  "version": "0.3.20",
+  "version": "0.3.21",
   "description": "A tool to search and replace text in files",
   "main": "./dist/module.js",
   "module": "./dist/module.js",
