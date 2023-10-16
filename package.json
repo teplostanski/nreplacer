@@ -1,6 +1,6 @@
 {
   "name": "nreplacer",
-  "version": "0.3.62",
+  "version": "0.3.66",
   "description": "A tool to search and replace text in files",
   "main": "./dist/module.js",
   "module": "./dist/module.js",
@@ -84,11 +84,5 @@
   },
   "bin": {
     "nreplacer": "./dist/cli.js"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "./husky/pre-commit",
-      "post-commit": "./husky/post-commit"
-    }
   }
 }
