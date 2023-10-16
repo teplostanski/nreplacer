@@ -5,8 +5,9 @@ echo "This script runs before every commit!"
 if git log --format=%B -n 1 HEAD | grep -q "chore(release):"; then
   exit 0
 fi
+#npx standard-version --release-as major
 
 npm run lint
 npm run prettier
-npm run release
+#npm run release
 git add .
