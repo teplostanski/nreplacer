@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.39](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v0.3.39) (2023-10-16)
+
 ### [0.3.38](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v0.3.38) (2023-10-16)
 
 ### [0.3.37](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v0.3.37) (2023-10-16)
