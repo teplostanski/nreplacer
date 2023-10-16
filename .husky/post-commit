@@ -2,4 +2,4 @@
 echo "This script runs after every commit!"
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run release --no-verify
+npm run release -- --no-verify
