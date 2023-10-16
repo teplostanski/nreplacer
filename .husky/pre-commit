@@ -4,5 +4,4 @@ echo "This script runs before every commit!"
 
 npm run lint
 npm run prettier
-npm run release
 git add .
