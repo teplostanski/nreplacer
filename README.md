@@ -54,17 +54,36 @@ nreplacer --file <filepath or directory> --search "/\d{3}-\d{2}-\d{4}/g" --repla
 
 #### For programmatic usage in your JavaScript or TypeScript projects:
 
+You can also utilize nreplacer in your JavaScript or TypeScript projects. Here's how you can use the replaceInFiles function:
+
+Example with plain text:
+
 ```javascript
-#!/usr/bin/env node
-import { replaceInFiles } from 'nreplacer'
+import { replaceInFiles } from "nreplacer";
 
-const filePathOrDir = 'test.txt'
-const searchValue = 'old'
-const replaceValue = 'new'
-const globalReplace = true
+const filePathOrDir = 'test.txt';
+const searchValue = 'old-text';
+const replaceValue = 'new-text';
+const globalReplace = true;
 
-replaceInFiles(filePathOrDir, searchValue, replaceValue, globalReplace)
+replaceInFiles(filePathOrDir, searchValue, replaceValue, globalReplace);
 ```
+
+Example with a regex pattern:
+
+```javascript
+
+import { replaceInFiles } from "nreplacer";
+
+const filePathOrDir = 'test.txt';
+const searchValue = /\d{3}-\d{2}-\d{4}/g; // Searching for patterns like "123-45-6789"
+const replaceValue = 'XXX-XX-XXXX';
+const globalReplace = true;
+
+replaceInFiles(filePathOrDir, searchValue, replaceValue, globalReplace);
+```
+
+By leveraging these examples, you can efficiently integrate nreplacer into your projects and automate text replacement tasks programmatically.
 
 ## Features
 
