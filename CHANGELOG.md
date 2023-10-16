@@ -2,45 +2,7 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [0.3.75](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.75) (2023-10-16)
-
-### [0.3.74](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.74) (2023-10-16)
-
-### [0.3.73](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.73) (2023-10-16)
-
-### [0.3.72](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.72) (2023-10-16)
-
-### [0.3.71](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.71) (2023-10-16)
-
-### [0.3.70](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.70) (2023-10-16)
-
-### [0.3.69](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.69) (2023-10-16)
-
-### [0.3.68](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.68) (2023-10-16)
-
-### [0.3.67](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.67) (2023-10-16)
-
-### [0.3.66](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.66) (2023-10-16)
-
-### [0.3.65](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.65) (2023-10-16)
-
-### [0.3.64](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.64) (2023-10-16)
-
-### [0.3.63](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.63) (2023-10-16)
-
-### [0.3.62](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.62) (2023-10-16)
-
-### [0.3.61](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.61) (2023-10-16)
-
-### [0.3.60](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.60) (2023-10-16)
-
-### [0.3.59](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.59) (2023-10-16)
-
-### [0.3.58](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.58) (2023-10-16)
-
-### [0.3.57](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.57) (2023-10-16)
-
-### [0.3.56](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.56) (2023-10-16)
+### [0.3.2](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.2) (2023-10-16)
 
 ### 0.3.1 (2023-10-16)
 
