@@ -39,11 +39,14 @@ program
     }
 
     try {
+      const hrStartTime = process.hrtime()
       const results = await replaceInFiles(filePathOrDir, search, replace, globalReplace)
+      const hrElapsedTime = process.hrtime(hrStartTime)
+      const seconds = hrElapsedTime[0]
+      const milliseconds = Math.floor(hrElapsedTime[1] / 1000000)
+      const microseconds = Math.floor((hrElapsedTime[1] / 1000) % 1000)
 
       if (!noprint) {
-        const startTime = Date.now()
-        const elapsedTime = ((Date.now() - startTime) / 1000).toFixed(2)
         let totalReplacements = 0
 
         for (const result of results) {
@@ -57,7 +60,7 @@ program
               output += `${chalk.yellow(result.filePath)} | Matches replaced: ${chalk.yellow(result.replacedLines)}\n`
             }
           }
-          output += `\n${chalk.blueBright('Time taken:')} ${chalk.yellowBright(elapsedTime + 's')}`
+          output += `\n${chalk.blueBright('Time taken:')} ${chalk.yellowBright(`${seconds}s ${milliseconds}.${microseconds}ms`)}`
           log.info(
             boxen(output, {
               padding: 0.5,
