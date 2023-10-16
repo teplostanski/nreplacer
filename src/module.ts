@@ -1,99 +1,122 @@
-import fs from 'fs'
-import path from 'path'
-import { promisify } from 'util'
+/**
+ * @fileoverview Module for searching and replacing text within files or directories.
+ * @module module
+ */
 
-const readFileAsync = promisify(fs.readFile)
-const writeFileAsync = promisify(fs.writeFile)
-const readdirAsync = promisify(fs.readdir)
-const statAsync = promisify(fs.stat)
+import fs from 'fs'
+import { createReadStream, createWriteStream } from 'fs'
+import { Transform } from 'stream'
+import fileType from 'file-type'
 
 /**
- * Escape special characters for a string to be safely used in regular expressions.
- *
- * @param string - The string to be escaped.
- * @returns The escaped string.
- *
- * @example
- * const safeString = escapeRegExp(".*+");
- * console.log(safeString); // \.\*\+
+ * Represents the result of a single file replacement operation.
  */
-function escapeRegExp(string: string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // $& means the whole matched string
-}
-
 interface ReplaceResult {
+  /**
+   * The path to the file where replacements were made.
+   */
+  filePath: string
+  /**
+   * The number of lines where replacements were made.
+   */
   replacedLines: number
 }
 
 /**
- * Replace occurrences in a specific file.
+ * Replaces occurrences of a search string or regular expression with a given replacement string in a file.
  *
  * @param filePath - The path to the target file.
- * @param search - The string or regular expression to search for.
- * @param replace - The replacement string.
- * @param isGlobal - Flag indicating if all occurrences should be replaced.
+ * @param searchValue - The string or regular expression to search for.
+ * @param replaceValue - The string to replace matched values with.
+ * @param globalReplace - If true and searchValue is a string, replace all occurrences. Default is false.
  *
- * @returns A promise resolving to the replacement result.
+ * @throws {Error} - Throws an error if the file does not exist or is not a text file.
  *
- * @example
- * replaceInFile('path/to/file.txt', 'Hello', 'Hi', true)
- *   .then(result => console.log(`Replaced lines: ${result.replacedLines}`))
+ * @returns {Promise<ReplaceResult>} - A promise that resolves with an object containing the file path and the number of lines replaced.
  */
-async function replaceInFile(filePath: string, search: string | RegExp, replace: string, isGlobal: boolean): Promise<ReplaceResult> {
-  const content = await readFileAsync(filePath, 'utf-8')
-
-  let regex: RegExp
-  if (typeof search === 'string') {
-    regex = new RegExp(escapeRegExp(search), isGlobal ? 'g' : '')
-  } else {
-    regex = new RegExp(search, isGlobal ? 'g' : '')
+async function replaceInFile(filePath: string, searchValue: string | RegExp, replaceValue: string, globalReplace = false): Promise<ReplaceResult> {
+  // Check if file exists
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`File not found: ${filePath}`)
   }
 
-  const matches = content.match(regex)
-  if (!matches) return { replacedLines: 0 }
+  // Determine file type and ensure it's a text file
+  const type = await fileType.fromFile(filePath)
+  if (type && !type.mime.startsWith('text/')) {
+    throw new Error(`Unsupported file type: ${type.mime}. This tool is intended for text files.`)
+  }
 
-  const newContent = content.replace(regex, replace)
-  await writeFileAsync(filePath, newContent, 'utf-8')
+  const readStream = createReadStream(filePath, { encoding: 'utf8' })
+  const writeStream = createWriteStream(filePath + '.tmp', { encoding: 'utf8' })
 
-  return { replacedLines: matches.length }
+  let totalMatches = 0
+
+  // Stream to handle the search and replace
+  const replaceStream = new Transform({
+    transform(chunk, _, callback) {
+      let data = chunk.toString()
+
+      if (typeof searchValue === 'string' && globalReplace) {
+        searchValue = new RegExp(searchValue, 'g')
+      }
+
+      // Count all matches in this chunk
+      const matches = (data.match(searchValue) || []).length
+      totalMatches += matches
+
+      // Replace text in this chunk
+      data = data.replace(searchValue, replaceValue)
+
+      callback(null, data)
+    },
+  })
+
+  // Pipe the read data through the replace stream and then write the modified data back to a temporary file
+  return new Promise((resolve, reject) => {
+    readStream
+      .pipe(replaceStream)
+      .pipe(writeStream)
+      .on('finish', function () {
+        // Rename the temporary file to the original filename
+        fs.renameSync(filePath + '.tmp', filePath)
+        resolve({ filePath, replacedLines: totalMatches })
+      })
+      .on('error', reject)
+  })
 }
 
 /**
- * Recursively replace occurrences in files within a directory or in a specific file.
+ * Replaces occurrences of a search string or regular expression with a given replacement string in files within a directory.
  *
- * @param filePathOrDir - The path to the directory or file.
- * @param search - The string or regular expression to search for.
- * @param replace - The replacement string.
- * @param isGlobal - Flag indicating if all occurrences should be replaced.
+ * @param filePathOrDir - The path to the target file or directory.
+ * @param searchValue - The string or regular expression to search for.
+ * @param replaceValue - The string to replace matched values with.
+ * @param globalReplace - If true and searchValue is a string, replace all occurrences. Default is false.
  *
- * @returns A promise resolving to the cumulative replacement result.
- *
- * @example
- * // Replace in a specific file
- * replaceInFiles('path/to/file.txt', 'Hello', 'Hi', true)
- *   .then(result => console.log(`Replaced lines: ${result.replacedLines}`));
- *
- * // Replace in all files in a directory
- * replaceInFiles('path/to/dir', 'Hello', 'Hi', true)
- *   .then(result => console.log(`Replaced lines in directory: ${result.replacedLines}`));
+ * @returns {Promise<ReplaceResult[]>} - A promise that resolves with an array of objects containing file paths and the number of lines replaced.
  */
-async function replaceInFiles(filePathOrDir: string, search: string | RegExp, replace: string, isGlobal: boolean): Promise<ReplaceResult> {
-  const stats = await statAsync(filePathOrDir)
-  let totalReplacedLines = 0
+async function replaceInFiles(filePathOrDir: string, searchValue: string | RegExp, replaceValue: string, globalReplace = false): Promise<ReplaceResult[]> {
+  const replaceResults: ReplaceResult[] = []
 
-  if (stats.isDirectory()) {
-    const items = await readdirAsync(filePathOrDir)
-    for (const item of items) {
-      const fullPath = path.join(filePathOrDir, item)
-      const result = await replaceInFiles(fullPath, search, replace, isGlobal)
-      totalReplacedLines += result.replacedLines
+  // Recursive function to process directories and files
+  async function processPath(path: string) {
+    const stat = fs.statSync(path)
+
+    if (stat.isDirectory()) {
+      const files = fs.readdirSync(path)
+
+      for (const file of files) {
+        await processPath(`${path}/${file}`)
+      }
+    } else if (stat.isFile()) {
+      const result = await replaceInFile(path, searchValue, replaceValue, globalReplace)
+      replaceResults.push(result)
     }
-  } else {
-    const result = await replaceInFile(filePathOrDir, search, replace, isGlobal)
-    totalReplacedLines += result.replacedLines
   }
 
-  return { replacedLines: totalReplacedLines }
+  await processPath(filePathOrDir)
+
+  return replaceResults
 }
 
 export { replaceInFiles }

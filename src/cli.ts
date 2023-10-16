@@ -2,7 +2,7 @@
 // cli.ts
 
 import { Command } from 'commander'
-import { replaceInFiles } from './module'
+import { replaceInFiles } from './module.js' // Обновленный импорт
 import chalk from 'chalk'
 import ora from 'ora'
 import cliui from 'cliui'
@@ -14,28 +14,6 @@ const version: string = process.env.VERSION || 'unknown'
 
 const program = new Command()
 
-/**
- * Command-line interface (CLI) tool for searching and replacing text within files or directories.
- *
- * - If a file path is provided, it performs the search and replace operation within the specific file.
- * - If a directory path is provided, it performs the search and replace operation recursively within all text files in the directory.
- *
- * @example
- * To replace text in a specific file:
- * ```bash
- * nreplacer -f ./path/to/file.txt -s oldText -r newText
- * ```
- *
- * To replace text globally in a specific file:
- * ```bash
- * nreplacer -f ./path/to/file.txt -s oldText -r newText -g
- * ```
- *
- * To replace text in all files within a directory:
- * ```bash
- * nreplacer -f ./path/to/dir -s oldText -r newText
- * ```
- */
 program
   .version(version, '-v, --version')
   .description('CLI tool for searching and replacing text within files or directories.')
@@ -72,11 +50,15 @@ program
       const results = await replaceInFiles(filePathOrDir, search, replace, globalReplace)
       const elapsedTime = ((Date.now() - startTime) / 1000).toFixed(2)
 
-      spinner.succeed(`Replaced "${chalk.yellow(search)}" with "${chalk.yellow(replace)}" in ${chalk.yellow(filePathOrDir)}`)
+      spinner.stop() // Останавливаем прогресс перед выводом информации
+
+      for (const result of results) {
+        log.success(`Replaced "${chalk.yellow(search)}" with "${chalk.yellow(replace)}" in ${chalk.yellow(result.filePath)}`)
+        log.info(`Matches replaced: ${chalk.yellow(result.replacedLines)}`)
+      }
 
       const ui = cliui({ width: 80 })
       ui.div(chalk.blueBright('Time taken: '), chalk.yellowBright(`${elapsedTime}s`))
-      ui.div(chalk.blueBright('Matches replaced: '), chalk.yellowBright(`${results.replacedLines}`))
 
       if (!noverbose) {
         log.info(ui.toString())

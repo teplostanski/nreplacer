@@ -3,4 +3,5 @@
 
 npm run lint
 npm run prettier
+npm run release
 git add .
