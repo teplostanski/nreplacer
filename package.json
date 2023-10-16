@@ -1,6 +1,6 @@
 {
   "name": "nreplacer",
-  "version": "0.3.16",
+  "version": "0.3.17",
   "description": "A tool to search and replace text in files",
   "main": "./dist/module.js",
   "module": "./dist/module.js",
@@ -14,7 +14,7 @@
     "test": "jest",
     "prepublish": "npm run build",
     "doc": "typedoc --readme none --options typedoc.config.cjs --includeVersion --entryPointStrategy Expand --entryDocument index.md --excludeGroups true",
-    "release": "standard-version -- --no-verify"
+    "release": "standard-version --no-verify"
   },
   "files": [
     "./dist",
