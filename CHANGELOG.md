@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.3](https://github.com/teplostanski/nreplacer/compare/v0.3.2...v0.3.3) (2023-10-16)
+
+
+### Features
+
+* **cli:** enhance output formatting and add microsecond precision ([93c9df3](https://github.com/teplostanski/nreplacer/commit/93c9df3f2a1748fa6ea450ffe4f218cd2fb1ef7c))
+
 ### [0.3.2](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.2) (2023-10-16)
 
 
