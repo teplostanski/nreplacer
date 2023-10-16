@@ -29,7 +29,7 @@ program
     const log = {
            error: nocolor ? console.error : (msg: string) => console.error(chalk.   red(msg)),
       success: nocolor ? console.log : (msg: string) => console.log(chalk.green(msg)),
-      info: nocolor ? console.log : (msg: string) => console.log(chalk.blue(msg)),
+      info:   nocolor ? console.log : (msg: string) => console.log(chalk.blue(msg)),
     }
 
     if (!filePathOrDir || !search || !replace) {
