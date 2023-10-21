@@ -75,12 +75,17 @@ Example with a regex pattern:
 
 import { replaceInFiles } from "nreplacer";
 
-const filePathOrDir = 'test.txt';
+const filePathOrDir1 = 'test1.txt';
+const filePathOrDir2 = 'test2.txt';
 const searchValue = /\d{3}-\d{2}-\d{4}/g; // Searching for patterns like "123-45-6789"
 const replaceValue = 'XXX-XX-XXXX';
 const globalReplace = true;
 
-replaceInFiles(filePathOrDir, searchValue, replaceValue, globalReplace);
+const replaceFunc1 = replaceInFiles
+const replaceFunc2 = replaceInFiles
+
+await replaceFunc1(filePathOrDir1, searchValue, replaceValue, globalReplace)
+await replaceFunc2(filePathOrDir2, searchValue)
 ```
 
 By leveraging these examples, you can efficiently integrate nreplacer into your projects and automate text replacement tasks programmatically.
