@@ -2,121 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [8.0.4](https://github.com/teplostanski/nreplacer/compare/v8.0.3...v8.0.4) (2023-10-16)
+### [0.3.6](https://github.com/teplostanski/nreplacer/compare/v0.3.5...v0.3.6) (2023-10-21)
 
-### [8.0.3](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v8.0.3) (2023-10-16)
+### [0.3.5](https://github.com/teplostanski/nreplacer/compare/v0.3.4...v0.3.5) (2023-10-16)
 
-### [8.0.2](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v8.0.2) (2023-10-16)
+### [0.3.4](https://github.com/teplostanski/nreplacer/compare/v0.3.3...v0.3.4) (2023-10-16)
 
-### [8.0.1](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v8.0.1) (2023-10-16)
+### [0.3.3](https://github.com/teplostanski/nreplacer/compare/v0.3.2...v0.3.3) (2023-10-16)
 
-## [8.0.0](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v8.0.0) (2023-10-16)
 
-## [7.0.0](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v7.0.0) (2023-10-16)
+### Features
 
-## [6.0.0](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v6.0.0) (2023-10-16)
-
-## [5.0.0](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v5.0.0) (2023-10-16)
-
-## [4.0.0](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v4.0.0) (2023-10-16)
-
-## [3.0.0](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v3.0.0) (2023-10-16)
-
-## [2.0.0](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v2.0.0) (2023-10-16)
-
-## [1.0.0](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v1.0.0) (2023-10-16)
-
-## [0.9.0](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v0.9.0) (2023-10-16)
-
-## [0.8.0](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v0.8.0) (2023-10-16)
-
-## [0.7.0](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v0.7.0) (2023-10-16)
-
-## [0.6.0](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v0.6.0) (2023-10-16)
-
-## [0.5.0](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v0.5.0) (2023-10-16)
-
-## [0.4.0](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v0.4.0) (2023-10-16)
-
-### [0.3.42](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v0.3.42) (2023-10-16)
-
-### [0.3.41](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v0.3.41) (2023-10-16)
-
-### [0.3.40](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v0.3.40) (2023-10-16)
-
-### [0.3.39](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v0.3.39) (2023-10-16)
-
-### [0.3.38](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v0.3.38) (2023-10-16)
-
-### [0.3.37](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v0.3.37) (2023-10-16)
-
-### [0.3.36](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v0.3.36) (2023-10-16)
-
-### [0.3.34](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v0.3.34) (2023-10-16)
-
-### [0.3.33](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v0.3.33) (2023-10-16)
-
-### [0.3.32](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v0.3.32) (2023-10-16)
-
-### [0.3.31](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v0.3.31) (2023-10-16)
-
-### [0.3.30](https://github.com/teplostanski/nreplacer/compare/v0.3.29...v0.3.30) (2023-10-16)
-
-### [0.3.29](https://github.com/teplostanski/nreplacer/compare/v0.3.28...v0.3.29) (2023-10-16)
-
-### [0.3.28](https://github.com/teplostanski/nreplacer/compare/v0.3.27...v0.3.28) (2023-10-16)
-
-### [0.3.27](https://github.com/teplostanski/nreplacer/compare/v0.3.26...v0.3.27) (2023-10-16)
-
-### [0.3.26](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.26) (2023-10-16)
-
-### [0.3.25](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.25) (2023-10-16)
-
-### [0.3.24](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.24) (2023-10-16)
-
-### [0.3.23](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.23) (2023-10-16)
-
-### [0.3.22](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.22) (2023-10-16)
-
-### [0.3.21](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.21) (2023-10-16)
-
-### [0.3.20](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.20) (2023-10-16)
-
-### [0.3.19](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.19) (2023-10-16)
-
-### [0.3.18](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.18) (2023-10-16)
-
-### [0.3.17](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.17) (2023-10-16)
-
-### [0.3.16](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.16) (2023-10-16)
-
-### [0.3.15](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.15) (2023-10-16)
-
-### [0.3.14](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.14) (2023-10-16)
-
-### [0.3.13](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.13) (2023-10-16)
-
-### [0.3.12](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.12) (2023-10-16)
-
-### [0.3.11](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.11) (2023-10-16)
-
-### [0.3.10](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.10) (2023-10-16)
-
-### [0.3.9](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.9) (2023-10-16)
-
-### [0.3.8](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.8) (2023-10-16)
-
-### [0.3.7](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.7) (2023-10-16)
-
-### [0.3.6](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.6) (2023-10-16)
-
-### [0.3.5](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.5) (2023-10-16)
-
-### [0.3.4](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.4) (2023-10-16)
-
-### [0.3.3](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.3) (2023-10-16)
+* **cli:** enhance output formatting and add microsecond precision ([93c9df3](https://github.com/teplostanski/nreplacer/commit/93c9df3f2a1748fa6ea450ffe4f218cd2fb1ef7c))
 
 ### [0.3.2](https://github.com/teplostanski/nreplacer/compare/v0.3.1...v0.3.2) (2023-10-16)
+
+
+### Features
+
+* **cli:** enhance CLI output with bordered box and noprint option ([d26b810](https://github.com/teplostanski/nreplacer/commit/d26b810dc159473c32a82f9008341bf33f7f837e))
 
 ### 0.3.1 (2023-10-16)
 
@@ -124,7 +28,6 @@ All notable changes to this project will be documented in this file. See [standa
 ### Features
 
 * add the main functional ([73d573d](https://github.com/teplostanski/nreplacer/commit/73d573d7ee8570ed2e72c3e1e435354aeceda908))
-* **cli:** Add easter egg with HTTP 418 'Im a teapot' reference ([97db444](https://github.com/teplostanski/nreplacer/commit/97db44401a8d27688d31545ad6a24d3b10f20a12))
 * **cli:** add shorthand flag for version ([8000b5b](https://github.com/teplostanski/nreplacer/commit/8000b5b620e852b2c8cf73792164f7a7edba2b19))
 * **cli:** change line replacement count to search match count ([8bacee3](https://github.com/teplostanski/nreplacer/commit/8bacee360f53eea7e32653fb288fb233b3b57d74))
 * **cli:** Integrate chalk, ora, and verbose options ([c979a1c](https://github.com/teplostanski/nreplacer/commit/c979a1c04ccfbbde1dd16c9ed2690d061b072f64))
